@@ -2,6 +2,6 @@
 
 ### upscayl
 
-提高圖片的解析度
+  用來提高圖片的解析度
 
   - Github: [upscayl](https://github.com/upscayl/upscayl)
