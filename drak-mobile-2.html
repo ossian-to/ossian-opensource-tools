@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>自動切換深色模式範例</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      font-size: 16px;
+      color: #333;
+      transition: 0.3s;
+    }
+
+    .dark-mode {
+      background-color: #222;
+      color: #fff;
+      /* transition: 0.3s; */
+    }
+
+    #theme-switcher {
+      margin-top: 20px;
+      padding: 10px;
+      font-size: 16px;
+      border: none;
+      background-color: #fff;
+      color: #333;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>自動切換深色模式範例</h1>
+  <p>這是一個可以自動切換深色模式的範例。</p>
+  <button id="theme-switcher">切換至深色模式</button>
+  <script>
+    // 獲取當前時間
+    var currentTime = new Date().getHours();
+
+    // 獲取用戶選擇的主題模式
+    var theme = localStorage.getItem("theme");
+
+    // 如果用戶之前已經選擇過主題模式，則使用用戶之前的選擇
+    if (theme === "dark") {
+      setDarkMode();
+    } else if (theme === "light") {
+      setLightMode();
+    } else {
+      // 如果用戶之前沒有選擇過主題模式，則根據時間自動切換主題模式
+      if (currentTime >= 19 || currentTime < 6) {
+        setDarkMode();
+      } else {
+        setLightMode();
+      }
+    }
+
+    // 監聽主題切換按鈕的點擊事件
+    document.getElementById("theme-switcher").addEventListener("click", function () {
+      if (document.body.classList.contains("dark-mode")) {
+        setLightMode();
+        localStorage.setItem("theme", "light");
+      } else {
+        setDarkMode();
+        localStorage.setItem("theme", "dark");
+      }
+    });
+    
+
+    // 設置深色模式
+    function setDarkMode() {
+      document.body.classList.add("dark-mode");
+      document.getElementById("theme-switcher").textContent = "日光閱讀";
+    }
+
+    // 設置亮色模式
+    function setLightMode() {
+      document.body.classList.remove("dark-mode");
+      document.getElementById("theme-switcher").textContent = "暗光閱讀";
+    }
+
+    
+  </script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>Overlay Popup Example</title>
+    <style>
+      /* Popup styling */
+      .popup {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: white;
+        width: 300px;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        opacity: 0;
+        transition: opacity 1.3s ease-in-out;
+      }
+
+      /* Overlay styling */
+      .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: none;
+        opacity: 0;
+        transition: opacity 1.3s ease-in-out;
+      }
+
+      .overlay.show {
+        display: block;
+        opacity: 1;
+      }
+
+      .popup.show {
+        opacity: 1;
+      }
+    </style>
+  </head>
+
+  <body>
+    <button id="open-popup">Open Popup</button>
+
+    <div class="overlay">
+      <div class="popup">
+        <h2>Hello, World!</h2>
+        <p>This is an example of an overlay popup.</p>
+        <button id="close-popup">Close</button>
+      </div>
+    </div>
+
+    <script>
+      const openPopupButton = document.querySelector('#open-popup');
+      const closePopupButton = document.querySelector('.popup #close-popup');
+      const overlay = document.querySelector('.overlay');
+      const popup = document.querySelector('.popup');
+
+      openPopupButton.addEventListener('click', function () {
+        overlay.classList.add('show');
+        popup.classList.add('show');
+      });
+
+      closePopupButton.addEventListener('click', function () {
+        overlay.classList.remove('show');
+        popup.classList.remove('show');
+      });
+
+      overlay.addEventListener('click', function () {
+        overlay.classList.remove('show');
+        popup.classList.remove('show');
+      });
+    </script>
+  </body>
+
+</html>

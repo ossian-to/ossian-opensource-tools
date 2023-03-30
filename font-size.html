@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="UTF-8">
+    <title>文字尺寸調整</title>
+    <style>
+      body {
+        font-size: 1rem;
+        transition: font-size 0.3s ease;
+      }
+
+      .button {
+        font-size: 1rem;
+        background-color: white;
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      .button.active {
+        background-color: red;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>文字尺寸調整</h1>
+      <p>選擇文字尺寸:</p>
+      <button class="button" id="large-btn">大</button>
+      <button class="button" id="medium-btn">中</button>
+      <button class="button" id="small-btn">小</button>
+    </div>
+
+    <script>
+      const fontSizeMap = {
+        'large': '1.5rem',
+        'medium': '1rem',
+        'small': '0.875rem'
+      };
+
+      const btnIds = ['large-btn', 'medium-btn', 'small-btn'];
+
+      function setActiveButton(btnId) {
+        for (let i = 0; i < btnIds.length; i++) {
+          const btn = document.getElementById(btnIds[i]);
+          if (btn.id === btnId) {
+            btn.classList.add('active');
+          } else {
+            btn.classList.remove('active');
+          }
+        }
+      }
+
+      function setFontSize(fontSize) {
+        document.body.style.fontSize = fontSize;
+      }
+
+      function handleClick(event) {
+        const btnId = event.target.id;
+        const fontSize = fontSizeMap[btnId.replace('-btn', '')];
+        setFontSize(fontSize);
+        setActiveButton(btnId);
+        localStorage.setItem('fontSize', fontSize);
+      }
+
+      for (let i = 0; i < btnIds.length; i++) {
+        const btn = document.getElementById(btnIds[i]);
+        btn.addEventListener('click', handleClick);
+      }
+
+      const savedFontSize = localStorage.getItem('fontSize');
+      if (savedFontSize) {
+        setFontSize(savedFontSize);
+        for (let i = 0; i < btnIds.length; i++) {
+          const fontSize = fontSizeMap[btnIds[i].replace('-btn', '')];
+          if (savedFontSize === fontSize) {
+            setActiveButton(btnIds[i]);
+            break;
+          }
+        }
+      } else {
+        setActiveButton('medium-btn');
+      }
+    </script>
+  </body>
+
+</html>

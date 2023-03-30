@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>自動切換深色模式範例</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      font-size: 16px;
+      color: #333;
+      background-color: #fff;
+      transition: background-color 0.3s ease;
+    }
+
+    body.dark-mode {
+      background-color: #222;
+      color: #fff;
+    }
+
+    #theme-switcher {
+      margin-top: 20px;
+      padding: 10px;
+      font-size: 16px;
+      border: none;
+      background-color: #fff;
+      color: #333;
+      cursor: pointer;
+    }
+
+    #theme-switcher.dark-mode {
+      background-color: #333;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <h1>自動切換深色模式範例</h1>
+  <p>這是一個可以自動切換深色模式的範例。</p>
+  <button id="theme-switcher">切換至深色模式</button>
+
+
+
+  <script>
+    const currentTime = new Date().getHours();
+    const savedTheme = localStorage.getItem("theme");
+    const bodyEl = document.body;
+    const themeSwitcherEl = document.getElementById("theme-switcher");
+
+    function setTheme(theme) {
+      bodyEl.classList.toggle("dark-mode", theme === "dark");
+      themeSwitcherEl.textContent = theme === "dark" ? "切換至亮色模式" : "切換至深色模式";
+      localStorage.setItem("theme", theme);
+    }
+
+    if (savedTheme === "dark" || (currentTime >= 19 || currentTime < 6)) {
+      setTheme("dark");
+    } else {
+      setTheme("light");
+    }
+
+    themeSwitcherEl.addEventListener("click", () => {
+      const newTheme = bodyEl.classList.contains("dark-mode") ? "light" : "dark";
+      setTheme(newTheme);
+    });
+  </script>
+</body>
+</html>

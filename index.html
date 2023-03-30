@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="assets/css/ossian-toolbox.css">
+  
+  
+</head>
+<body>
+  <a href="index.html">001</a><a href="index-2.html">002</a>
+  
+  <div class="container">
+
+
+    <input type="range" id="range-slider" min="60" max="100" step="1" value="80">
+    <button id="theme-switcher">切換至深色模式</button>
+    <button class="button" id="decrease">-</button>
+    <button class="button" id="increase">+</button>
+
+
+    <h2>Article Title</h2>
+    <p>content text.content text.content text.content text.content text.content text.content text.content text.content text.</p>
+    <p>content text.content text.content text.content text.content text.</p>
+    <p>content text.content text.content text.content text.content text.content text.content text.content text.content text.content text.content text.content text.content text.content text.content text.content text.content text.content text.</p>
+    <p>content text.content text.content text.content text.content text.content text.content text.content text.content text.</p>
+
+
+  </div>
+
+
+
+
+  <script src="assets/js/ossian-toolbox.js"></script>
+  <!-- <script src="assets/js/font-size.js"></script> -->
+  <script>
+    // 讓使用者自訂容器寬度
+    initRangeSlider('.container', '#range-slider');
+    // 深色模式
+    const ossianTheme = new themesMode();
+    // 設定文字大小變更功能，最大為 2.25em，最小為 0.875em，每次變更 0.25em
+    changeFontSize(0.25, 2.25, 0.875);
+  </script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8" />
+    <title>天氣資訊</title>
+    <style>
+      body {
+        background-size: cover;
+        background-position: center center;
+        transition: background-image 0.5s ease-in-out;
+      }
+
+      .weather-info {
+        font-size: 32px;
+        font-weight: bold;
+        text-align: center;
+        margin-top: 50px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="weather-info"></div>
+    <script>
+      const API_KEY = "8f3a0648fdf32f8681b0baacb6bb8923";
+      const weatherInfo = document.querySelector(".weather-info");
+
+      // get user location
+      navigator.geolocation.getCurrentPosition(success, error);
+
+      function success(position) {
+        const latitude = position.coords.latitude;
+        const longitude = position.coords.longitude;
+        const apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${API_KEY}&units=metric`;
+        fetch(apiUrl)
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data);
+            const weatherDescription = data.weather[0].description;
+            const temperature = data.main.temp;
+            weatherInfo.innerHTML = `${weatherDescription}, ${temperature}°C`;
+
+            // set background image based on weather
+            const weatherCode = data.weather[0].id;
+            const backgroundImage = getBackgroundImage(weatherCode);
+            document.body.style.backgroundImage = `url(${backgroundImage})`;
+          });
+      }
+
+      function error() {
+        weatherInfo.innerHTML = "無法取得當前位置的天氣資訊";
+      }
+
+      function getBackgroundImage(weatherCode) {
+        switch (true) {
+          case weatherCode >= 200 && weatherCode < 300:
+            return "https://images.unsplash.com/photo-1561038596-3f6ff2d0647a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60";
+          case weatherCode >= 300 && weatherCode < 500:
+            return "https://images.unsplash.com/photo-1508672019047-805c876b67e9?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60";
+          case weatherCode >= 500 && weatherCode < 600:
+            return "https://images.unsplash.com/photo-1533750085334-e4c9e8d43ab9?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60";
+          case weatherCode >= 600 && weatherCode < 700:
+            return "https://images.unsplash.com/photo-1548350906-8142176ed715?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60";
+          default:
+            return "https://images.unsplash.com/photo-1543075986-67a0ba3b3fab?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60";
+        }
+      }
+    </script>
+  </body>
+
+</html>

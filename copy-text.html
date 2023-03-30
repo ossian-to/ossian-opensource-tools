@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>Copy Text Field Example</title>
+    <style>
+      /* 彈出視窗樣式 */
+      .popup {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: none;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .popup-content {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        text-align: center;
+      }
+    </style>
+  </head>
+
+  <body>
+    <input type="text" id="myInput" value="Hello World!">
+    <button onclick="copyText()">Copy Text</button>
+
+    <!-- 彈出視窗 -->
+    <div id="popup" class="popup">
+      <div class="popup-content">
+        <p>Text copied to clipboard!</p>
+      </div>
+    </div>
+
+    <script>
+      function copyText() {
+          var copyText = document.getElementById("myInput");
+          copyText.select();
+          document.execCommand("copy");
+
+          // 顯示彈出視窗
+          var popup = document.getElementById("popup");
+          popup.style.display = "flex";
+
+          // 3秒後隱藏彈出視窗
+          setTimeout(function () {
+            popup.style.display = "none";
+          }, 1000);
+        }
+    </script>
+  </body>
+
+</html>

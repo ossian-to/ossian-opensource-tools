@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>自動切換深色模式範例</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        font-size: 16px;
+        color: #333;
+        background-color: #fff;
+        transition: background-color 0.3s ease;
+      }
+
+      body.dark-mode {
+        background-color: #222;
+        color: #fff;
+      }
+
+      #theme-switcher {
+        margin-top: 20px;
+        padding: 10px;
+        font-size: 16px;
+        border: none;
+        background-color: #fff;
+        color: #333;
+        cursor: pointer;
+      }
+
+      #theme-switcher.dark-mode {
+        background-color: #333;
+        color: #fff;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>自動切換深色模式範例</h1>
+    <p>這是一個可以自動切換深色模式的範例。</p>
+    <button id="theme-switcher">切換至深色模式</button>
+
+    <script>
+      class themesMode {
+        constructor(themeSwitcherElId = "theme-switcher") {
+          this.currentTime = new Date().getHours();
+          this.savedTheme = localStorage.getItem("theme");
+          this.bodyEl = document.body;
+          this.themeSwitcherEl = document.getElementById(themeSwitcherElId);
+          this.init();
+        }
+
+        init() {
+          if (this.savedTheme === "dark" || (this.currentTime >= 19 || this.currentTime < 6)) {
+            this.setTheme("dark");
+          } else {
+            this.setTheme("light");
+          }
+          this.themeSwitcherEl.addEventListener("click", () => {
+            const newTheme = this.bodyEl.classList.contains("dark-mode") ? "light" : "dark";
+            this.setTheme(newTheme);
+          });
+        }
+
+        setTheme(theme) {
+          this.bodyEl.classList.toggle("dark-mode", theme === "dark");
+          this.themeSwitcherEl.textContent = theme === "dark" ? "日光閱讀" : "月光閱讀";
+          localStorage.setItem("theme", theme);
+        }
+      }
+
+      const ossianTheme = new themesMode();
+
+    </script>
+  </body>
+
+</html>

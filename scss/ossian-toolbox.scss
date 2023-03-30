@@ -1,0 +1,68 @@
+*{
+  box-sizing: border-box;
+}
+html{
+  font-size: 16px;
+}
+html, body{
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-size: 1em;
+}
+// 切換閱讀模式
+body {
+  color: #333;
+  background-color: #fff;
+  transition: background-color 0.3s ease, font-size 0.3s ease;
+  .container{
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+}
+
+body.dark-mode {
+  background-color: #222;
+  color: #fff;
+  .container{
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+}
+
+#theme-switcher {
+  margin-top: 20px;
+  padding: 10px;
+  // font-size: 16px;
+  border: none;
+  background-color: #fff;
+  color: #333;
+  cursor: pointer;
+  &.dark-mode {
+    background-color: #333;
+    color: #fff;
+  }
+}
+
+// 改變容器寬度，預設是 80%
+.container {
+  width: 80%;
+  margin: 0 auto;
+  padding: 20px;
+  transition: width 0.3s;
+}
+
+input[type="range"] {
+  width: 100%;
+}
+
+// 改變文字的大小
+.button {
+  font-size: 16px;
+  background-color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  &.active {
+    background-color: red;
+  }
+}

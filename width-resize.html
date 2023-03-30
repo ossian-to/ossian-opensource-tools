@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Range Slider Example</title>
+    <style>
+      *{
+        box-sizing: border-box;
+      }
+      .container {
+        width: 60%;
+        margin: 0 auto;
+        background-color: #eee;
+        padding: 20px;
+        transition: width 0.3s;
+      }
+
+      input[type="range"] {
+        width: 100%;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <h2>Container</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sit amet quam leo. Suspendisse sit amet arcu
+        neque. Nulla facilisi. Sed quis sapien vestibulum, tincidunt nunc at, sollicitudin ipsum. Fusce vitae quam
+        malesuada, vestibulum massa eu, fringilla dolor. Fusce non tempor nibh, a bibendum massa. Praesent in lectus et
+        augue vehicula vestibulum eget vitae quam.</p>
+      <input type="range" id="range-slider" min="60" max="100" step="1" value="80">
+    </div>
+
+    <script>
+      function initRangeSlider(containerSelector, rangeSliderSelector) {
+        const container = document.querySelector(containerSelector);
+        const rangeSlider = document.querySelector(rangeSliderSelector);
+
+        function setContainerWidth(width) {
+          container.style.width = width + '%';
+        }
+
+        function hideRangeSlider() {
+          rangeSlider.style.display = 'none';
+        }
+
+        function handleRangeSliderChange(event) {
+          const width = event.target.value;
+          setContainerWidth(width);
+          localStorage.setItem('containerWidth', width);
+        }
+
+        if (window.innerWidth < 1200) {
+          setContainerWidth(100);
+          hideRangeSlider();
+        } else {
+          const storedWidth = localStorage.getItem('containerWidth');
+          if (storedWidth) {
+            setContainerWidth(storedWidth);
+            rangeSlider.value = storedWidth;
+          }
+
+          rangeSlider.addEventListener('input', handleRangeSliderChange);
+        }
+
+        window.addEventListener('resize', () => {
+          if (window.innerWidth < 1200) {
+            setContainerWidth(100);
+            hideRangeSlider();
+          } else {
+            rangeSlider.style.display = 'block';
+            const storedWidth = localStorage.getItem('containerWidth');
+            if (storedWidth) {
+              setContainerWidth(storedWidth);
+              rangeSlider.value = storedWidth;
+            }
+          }
+        });
+      }
+      // 初始化容器寬度
+      initRangeSlider('.container', '#range-slider');
+    </script>
+  </body>
+
+</html>

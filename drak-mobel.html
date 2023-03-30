@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="UTF-8">
+    <title>深色模式示例</title>
+    <style>
+      *{
+        transition: 0.3s;
+      }
+      /* 定義亮色和深色主題的樣式 */
+      :root {
+        --bg-color: #fff;
+        --text-color: #000;
+      }
+
+      [data-theme="dark"] {
+        --bg-color: #333;
+        --text-color: #fff;
+      }
+
+      /* 根據主題設置樣式 */
+      body {
+        background-color: var(--bg-color);
+        color: var(--text-color);
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>深色模式示例</h1>
+    <p>點擊下面的切換器來切換深色模式：</p>
+    <div class="dark-mode-switch">
+      <input type="checkbox" id="toggle-switch">
+      <label for="toggle-switch">切換深色模式</label>
+    </div>
+
+    <button class="small-button">16px</button>
+    <button class="medium-button">24px</button>
+    <button class="large-button">30px</button>
+<div class="text">
+    <p>text content text content text content text content text contenttext contenttext contenttext contenttext contenttext contenttext contenttext contenttext content</p>
+    <p>text contenttext content text content text contenttext contenttext contenttext contenttext contenttext contenttext contenttext contenttext contenttext content</p>
+    <p>text contenttext content text content text contenttext contenttext contenttext contenttext contenttext contenttext  contenttext contenttext contenttext content</p>
+    <p>text contenttext content text content text contenttext contenttext contenttext contenttext contenttext contenttext contenttext contenttext contenttext content</p>
+</div>
+    <script>
+    // 獲取深色模式開關元素
+      const toggleSwitch = document.querySelector('.dark-mode-switch input[type="checkbox"]');
+      // 獲取當前主題模式
+      const currentTheme = localStorage.getItem('theme');
+
+      // 如果用戶先前已經選擇了主題模式
+      if (currentTheme) {
+        // 在切換器上切換到相應的位置
+        toggleSwitch.checked = currentTheme === 'dark';
+        // 將網站的主題設置為當前主題
+        setTheme(currentTheme);
+      }
+
+      // 監聽切換器的更改事件
+      toggleSwitch.addEventListener('change', function (event) {
+        // 如果切換器為選中狀態
+        if (event.target.checked) {
+          // 設置主題為深色
+          setTheme('dark');
+          // 將當前主題存儲到本地存儲中
+          localStorage.setItem('theme', 'dark');
+        } else {
+          // 設置主題為亮色
+          setTheme('light');
+          // 將當前主題存儲到本地存儲中
+          localStorage.setItem('theme', 'light');
+        }
+      });
+
+      // 設置網站主題
+      function setTheme(theme) {
+        // 根據主題設置不同的樣式
+        if (theme === 'dark') {
+          document.documentElement.setAttribute('data-theme', 'dark');
+        } else {
+          document.documentElement.setAttribute('data-theme', 'light');
+        }
+      }
+
+
+
+
+      // 改變文字的大小
+
+      // 獲取三個更改文字大小的按鈕元素
+        const smallButton = document.querySelector('.small-button');
+        const mediumButton = document.querySelector('.medium-button');
+        const largeButton = document.querySelector('.large-button');
+        // 獲取要更改大小的文字元素
+        const text = document.querySelector('.text');
+
+        // 定義一個變量來保存用戶選擇的文字大小
+        let textSize = localStorage.getItem('textSize') || '16px';
+        text.style.fontSize = textSize;
+
+        // 監聽三個按鈕的點擊事件
+        smallButton.addEventListener('click', function () {
+          // 更改文字大小為16px
+          textSize = '16px';
+          text.style.fontSize = textSize;
+          localStorage.setItem('textSize', textSize);
+        });
+
+        mediumButton.addEventListener('click', function () {
+          // 更改文字大小為24px
+          textSize = '24px';
+          text.style.fontSize = textSize;
+          localStorage.setItem('textSize', textSize);
+        });
+
+        largeButton.addEventListener('click', function () {
+          // 更改文字大小為30px
+          textSize = '30px';
+          text.style.fontSize = textSize;
+          localStorage.setItem('textSize', textSize);
+        });
+    </script>
+  </body>
+
+</html>
