@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/ScrollTrigger.min.js"></script>
+  <style>
+
+    .container {
+      position: relative;
+      height: 5000px;
+      background-color:#ccc;
+    }
+
+    .box {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      background-color: red;
+      position: relative;
+      top: 50%;
+      left: calc(50% - 100px);
+    }
+
+  </style>
+</head>
+<body>
+
+
+  <div class="container">
+    <div class="box"></div>
+  </div>
+
+
+  <script>
+
+    gsap.to(".box", {
+      x: 100,
+      width: 500,
+      // dudration: 1,
+      // rotation: 360,
+      scrollTrigger: {
+        trigger: ".box",
+        start: "bottom bottom",
+        end: "top center",
+        // pin: true,
+        scrub: true,
+        markers: true
+      }
+    });
+
+
+  </script>
+
+</body>
+</html>
